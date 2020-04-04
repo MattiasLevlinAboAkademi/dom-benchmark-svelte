@@ -1,104 +1,80 @@
 <script>
 
 	let benchmarkContainer;
+	let something = 'asdvt2';
+	let asd1 = null;
+	let asd2 = null;
 
-	// A EMPTY DIVS
+	import { beforeUpdate, afterUpdate } from 'svelte';
+
+	// NONEMPTY DIVS
 
 	// 1
-	function addEmpty(elementType) {
+	function add() {
+		asd1 = performance.now()
+		something = !something;
 		for (var i = 0; i < 10000; i += 1) {
-			const child = document.createElement(elementType)
+			const child = document.createElement('div')
 			child.setAttribute('id', i)
 			child.setAttribute('className', 'benchmarkDiv')
+			child.textContent = ('Div ' + i)
 			benchmarkContainer.appendChild(child)
 		}
 	}
 
 	// 2
-	function editOneEmpty(elementType) {
-		// ...
-	}
-
-	// 3
-	function editAllEmpty(elementType) {
-		// ...
-	}
-
-	// 4
-	function removeOneEmpty(elementType) {
-		// ...
-	} 
-
-	// 5
-	function removeAllEmpty(elementType) {
-		// ...
-	} 
-
-	// B NONEMPTY DIVS
-
-	// 6
-	function add(elementType) {
-		for (var i = 0; i < 10000; i += 1) {
-			const child = document.createElement(elementType)
-			child.setAttribute('id', i)
-			child.setAttribute('className', 'benchmarkDiv')
-			child.textContent = (elementType + ' ' + i)
-			benchmarkContainer.appendChild(child)
-		}
-	}
-
-	// 7
 	function editOne() {
+		asd1 = performance.now()
 		const child = document.getElementById('2')
 		child.textContent = 'ddd'
 	}
 
-	// 8
+	// 3
 	function editAll(elementType) {
+		asd1 = performance.now()
 		// ...
 	}
 
-	// 9
+	// 4
 	function removeOne(elementType) {
-		// ...
+		asd1 = performance.now()
+		benchmarkContainer.removeChild(document.getElementById('2'))
 	} 
 
-	// 10
+	// 5
 	function removeAll(elementType) {
-		// ...
+		asd1 = performance.now()
+		benchmarkContainer.innerHTML = ''
 	} 
+
+	beforeUpdate(() => {
+		// asd2 = performance.now()
+		console.log('333')
+	});
+
+	afterUpdate(() => {
+		asd2 = performance.now()
+		console.log('Took ', (asd2 - asd1), ' milliseconds')
+	});
+
+
 </script>
 
 <main>
-	<p>A) div, empty</p>
-	<button on:click={() => addEmpty("div")}>1 add</button>
-	<button on:click={() => editOneEmpty("div")}>2 editOne</button>
-	<button on:click={() => editAllEmpty("div")}>3 editAll</button>
-	<button on:click={() => removeOneEmpty("div")}>4 removeOne</button>
-	<button on:click={() => removeAllEmpty("div")}>5 removeOne</button>
 	<p>B) div, nonempty</p>
-	<button on:click={() => add("div")}>6 add</button>
+	<button on:click={() => add()}>6 add</button>
 	<button on:click={editOne}>7 editOne</button>
 	<button on:click={editAll}>8 editAll</button>
 	<button on:click={removeOne}>9 removeOne</button>
 	<button on:click={removeAll}>10 removeAll</button>
-	<p>C) svg, empty</p>
-	<button on:click={() => addEmpty("svg")}>11 add</button>
-	<button on:click={editOneEmpty}>12 editOne</button>
-	<button on:click={editAllEmpty}>13 editAll</button>
-	<button on:click={removeOneEmpty}>14 removeOne</button>
-	<button on:click={removeAllEmpty}>15 removeAll</button>
-	<p>D) svg, nonempty</p>
-	<button on:click={() => add("svg")}>16 add</button>
-	<button on:click={editOne}>17 editOne</button>
-	<button on:click={editAll}>18 editAll</button>
-	<button on:click={removeOne}>19 removeOne</button>
-	<button on:click={removeAll}>20 removeAll</button>
 	<div
 		bind:this={benchmarkContainer}
 		id='benchmarkContainer'
 	/>
+	{{something}}
 </main>
+
+
 
 <style>
 	div {
