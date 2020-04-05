@@ -5,7 +5,7 @@
 	let asd1 = null;
 	let asd2 = null;
 
-	import { beforeUpdate, afterUpdate } from 'svelte';
+	import { afterUpdate } from 'svelte';
 
 	// NONEMPTY DIVS
 
@@ -34,10 +34,10 @@
 	function editAll(elementType) {
 		asd1 = performance.now()
 		let zxc = document.getElementById('benchmarkContainer')
-		console.log(zxc.children.length)
 		for (var i = 0; i < zxc.children.length; i += 1) {
 			zxc.children[i].textContent = 'Div ' + Math.random()
-		} 
+		}
+		something = !something;
 	}
 
 	// 4
@@ -53,11 +53,6 @@
 		benchmarkContainer.innerHTML = ''
 		something = !something;
 	} 
-
-	beforeUpdate(() => {
-		// asd2 = performance.now()
-		console.log('333')
-	});
 
 	afterUpdate(() => {
 		asd2 = performance.now()
