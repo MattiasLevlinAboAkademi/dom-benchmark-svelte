@@ -12,7 +12,6 @@
 	// 1
 	function add() {
 		asd1 = performance.now()
-		something = !something;
 		for (var i = 0; i < 10000; i += 1) {
 			const child = document.createElement('div')
 			child.setAttribute('id', i)
@@ -20,6 +19,7 @@
 			child.textContent = ('Div ' + i)
 			benchmarkContainer.appendChild(child)
 		}
+		something = !something;
 	}
 
 	// 2
@@ -38,13 +38,15 @@
 	// 4
 	function removeOne(elementType) {
 		asd1 = performance.now()
-		benchmarkContainer.removeChild(document.getElementById('2'))
+		benchmarkContainer.removeChild(document.getElementById(benchmarkContainer.children.length-1))
+		something = !something;
 	} 
 
 	// 5
 	function removeAll(elementType) {
 		asd1 = performance.now()
 		benchmarkContainer.innerHTML = ''
+		something = !something;
 	} 
 
 	beforeUpdate(() => {
