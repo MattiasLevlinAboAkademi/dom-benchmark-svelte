@@ -26,13 +26,18 @@
 	function editOne() {
 		asd1 = performance.now()
 		const child = document.getElementById('2')
-		child.textContent = 'ddd'
+		child.textContent = 'Div ' + Math.random()
+		something = !something
 	}
 
 	// 3
 	function editAll(elementType) {
 		asd1 = performance.now()
-		// ...
+		let zxc = document.getElementById('benchmarkContainer')
+		console.log(zxc.children.length)
+		for (var i = 0; i < zxc.children.length; i += 1) {
+			zxc.children[i].textContent = 'Div ' + Math.random()
+		} 
 	}
 
 	// 4
