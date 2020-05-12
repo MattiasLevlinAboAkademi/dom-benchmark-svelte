@@ -75,16 +75,3 @@
 	/>
 	{{something}}
 </main>
-
-
-
-<style>
-	div {
-		background: red;
-		color: red;
-	}
-	button {
-		background: red;
-		color: red;
-	}
-</style>
